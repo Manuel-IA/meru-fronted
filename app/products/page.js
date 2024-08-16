@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import api from '../../lib/api';
-import Link from 'next/link';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import ProductCard from '../components/ProductCard';
 import withAuth from '../../lib/withAuth';
 
 function Products() {
@@ -31,29 +35,28 @@ function Products() {
   };
 
   return (
-    <div>
-      <h1>Products</h1>
-      <Link href="/products/new">
-        <button>Add New Product</button>
-      </Link>
-      <ul>
+    <Container maxWidth="md" sx={{ marginTop: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Products
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        href="/products/new"
+        sx={{ marginBottom: 2 }}
+      >
+        Add New Product
+      </Button>
+      <Grid container spacing={4}>
         {products.map((product) => (
-          <li key={product.id}>
-            {product.name} |
-            {product.price} |
-            {product.description} |
-            {product.approximate_dimensions}
-            <button onClick={() => deleteProduct(product.id)}>Delete</button>
-            <Link href={`/products/${product.id}/edit`}>
-              <button>Edit</button>
-            </Link>
-            <Link href={`/products/${product.id}`}>
-              <button>Details</button>
-            </Link>
-          </li>
+          <ProductCard 
+            key={product.id} 
+            product={product} 
+            onDelete={deleteProduct} 
+          />
         ))}
-      </ul>
-    </div>
+      </Grid>
+    </Container>
   );
 }
 

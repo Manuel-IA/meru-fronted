@@ -1,28 +1,17 @@
 "use client";
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Container from '@mui/material/Container';
+import ProductForm from '../../components/ProductForm';
 import api from '../../../lib/api';
 import withAuth from '../../../lib/withAuth';
 
 function NewProduct() {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [approximate_dimensions, setDimensions] = useState('');
   const router = useRouter();
 
-  const createProduct = async (e) => {
-    e.preventDefault();
+  const createProduct = async (productData) => {
     try {
-      await api.post('/products', {
-        product: {
-          name,
-          price,
-          description,
-          approximate_dimensions,
-        },
-      });
+      await api.post('/products', { product: productData });
       router.push('/products');
     } catch (error) {
       console.error('Failed to create product:', error);
@@ -30,32 +19,12 @@ function NewProduct() {
   };
 
   return (
-    <form onSubmit={createProduct}>
-      <input
-        type="text"
-        placeholder="Product Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <ProductForm 
+        formTitle="Create New Product" 
+        onSubmit={createProduct} 
       />
-      <input
-        type="text"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Approximate Dimensions"
-        value={approximate_dimensions}
-        onChange={(e) => setDimensions(e.target.value)}
-      />
-      <button type="submit">Create Product</button>
-    </form>
+    </Container>
   );
 }
 

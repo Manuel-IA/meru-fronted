@@ -1,81 +1,52 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
+import Container from '@mui/material/Container';
+import ProductForm from '../../../components/ProductForm';
 import api from '../../../../lib/api';
 import withAuth from '../../../../lib/withAuth';
 
-function EditProduct({ params }) {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [approximate_dimensions, setDimensions] = useState('');
+function EditProduct() {
+  const [product, setProduct] = useState(null);
   const router = useRouter();
-  const { id } = params;
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
-      if (id) {
-        try {
-          const response = await api.get(`/products/${id}`);
-          setName(response.data.name);
-          setPrice(response.data.price);
-          setDescription(response.data.description);
-          setDimensions(response.data.approximate_dimensions);
-        } catch (error) {
-          console.error('Failed to fetch product:', error);
-        }
+      try {
+        const response = await api.get(`/products/${id}`);
+        setProduct(response.data);
+      } catch (error) {
+        console.error('Failed to fetch product:', error);
       }
     };
 
     fetchProduct();
   }, [id]);
 
-  const updateProduct = async (e) => {
-    e.preventDefault();
+  const updateProduct = async (productData) => {
     try {
-      await api.put(`/products/${id}`, { 
-        product: {
-          name,
-          price,
-          description,
-          approximate_dimensions,
-        } });
+      await api.put(`/products/${id}`, { product: productData });
       router.push('/products');
     } catch (error) {
       console.error('Failed to update product:', error);
     }
   };
 
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <form onSubmit={updateProduct}>
-      <input
-        type="text"
-        placeholder="Product Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <ProductForm 
+        formTitle="Edit Product" 
+        product={product} 
+        onSubmit={updateProduct} 
       />
-      <input
-        type="text"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Approximate Dimensions"
-        value={approximate_dimensions}
-        onChange={(e) => setDimensions(e.target.value)}
-      />
-      <button type="submit">Update Product</button>
-    </form>
+    </Container>
   );
 }
-
 
 export default withAuth(EditProduct);

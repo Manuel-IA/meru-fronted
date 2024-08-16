@@ -1,6 +1,11 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export default function Header() {
   const router = useRouter();
@@ -11,11 +16,18 @@ export default function Header() {
   };
 
   return (
-    <header style={{ padding: '1rem', backgroundColor: '#f5f5f5', display: 'flex', justifyContent: 'space-between' }}>
-      <h1>Meru Products</h1>
-      <button onClick={handleLogout} style={{ padding: '0.5rem 1rem', backgroundColor: '#0070f3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-        Logout
-      </button>
-    </header>
+    <>
+      <CssBaseline />
+      <AppBar position="fixed" sx={{ top: 0, left: 0, right: 0 }}>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Meru Products
+          </Typography>
+          <Button color="inherit" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }

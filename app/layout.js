@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Header from './components/Header';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,8 +14,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <CssBaseline />
         <Header /> {/* Include Header */}
-        <main>{children}</main>
+        <main>
+          <Container sx={{ mt: 10 }}> {/* Adjust margin-top to avoid overlap */}
+            {children}
+          </Container>
+        </main>
       </body>
     </html>
   );
