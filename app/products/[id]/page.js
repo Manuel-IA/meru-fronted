@@ -87,6 +87,9 @@ function ProductDetails({ params }) {
             <Typography variant="body2" color="text.secondary">
               Dimensions: {product.approximate_dimensions}
             </Typography>
+            <Typography variant="caption" color="text.secondary">
+              (Height x Width x Depth)
+            </Typography>
           </CardContent>
           <CardActions>
             <Button 

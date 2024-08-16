@@ -78,8 +78,8 @@ export default function ProductForm({ formTitle, product, onSubmit }) {
         error={dimensionsError}
         helperText={
           dimensionsError
-            ? "Please use the format: 'Altura cm x Ancho cm x Profundidad cm'"
-            : "Format: 'Altura cm x Ancho cm x Profundidad cm'"
+            ? "Please use the format: 'Height cm x Width cm x Depth cm'"
+            : "Format: 'Height cm x Width cm x Depth cm'"
         }
       />
       <Button
