@@ -29,7 +29,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/users/sign_in', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/sign_in`, {
         user: { email, password }
       });
 
