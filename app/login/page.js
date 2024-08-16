@@ -15,8 +15,16 @@ export default function Login() {
       const response = await axios.post('http://localhost:3001/users/sign_in', {
         user: { email, password }
       });
-      localStorage.setItem('token', response.data.token);
-      router.push('/products');
+
+      const token = response.headers['authorization'];
+
+      if (token && token.startsWith('Bearer ')) {
+        const jwtToken = token.split(' ')[1];
+        localStorage.setItem('token', jwtToken);
+        router.push('/products');
+      } else {
+        throw new Error('No Bearer token found in Authorization header');
+      }
     } catch (error) {
       console.error('Login failed:', error);
     }
