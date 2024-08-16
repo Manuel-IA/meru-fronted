@@ -9,8 +9,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import SuccessMessage from '../components/SuccessMessage';
+import ErrorMessage from '../components/ErrorMessage';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -22,6 +22,8 @@ const theme = createTheme();
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -36,12 +38,16 @@ export default function Login() {
       if (token && token.startsWith('Bearer ')) {
         const jwtToken = token.split(' ')[1];
         localStorage.setItem('token', jwtToken);
-        router.push('/products');
+        setSuccessMessage('Login successful!');
+        setTimeout(() => {
+          router.push('/products');
+        }, 500);
       } else {
         throw new Error('No Bearer token found in Authorization header');
       }
     } catch (error) {
       console.error('Login failed:', error);
+      setErrorMessage('Login failed. Please check your credentials and try again.');
     }
   };
 
@@ -63,6 +69,10 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+
+          <ErrorMessage message={errorMessage} />
+          <SuccessMessage message={successMessage} />
+
           <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -100,18 +110,6 @@ export default function Login() {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
