@@ -39,7 +39,10 @@ function Products() {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            {product.name}
+            {product.name} |
+            {product.price} |
+            {product.description} |
+            {product.approximate_dimensions}
             <button onClick={() => deleteProduct(product.id)}>Delete</button>
             <Link href={`/products/${product.id}/edit`}>
               <button>Edit</button>

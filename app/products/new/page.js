@@ -9,7 +9,7 @@ function NewProduct() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-  const [dimensions, setDimensions] = useState('');
+  const [approximate_dimensions, setDimensions] = useState('');
   const router = useRouter();
 
   const createProduct = async (e) => {
@@ -20,7 +20,7 @@ function NewProduct() {
           name,
           price,
           description,
-          approximate_dimensions: dimensions,
+          approximate_dimensions,
         },
       });
       router.push('/products');
@@ -51,7 +51,7 @@ function NewProduct() {
       <input
         type="text"
         placeholder="Approximate Dimensions"
-        value={dimensions}
+        value={approximate_dimensions}
         onChange={(e) => setDimensions(e.target.value)}
       />
       <button type="submit">Create Product</button>
