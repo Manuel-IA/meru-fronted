@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '../../../../lib/api';
+import withAuth from '../../../../lib/withAuth';
 
-export default function EditProduct({ params }) {
+function EditProduct({ params }) {
   const [name, setName] = useState('');
   const router = useRouter();
   const { id } = params;
@@ -46,3 +47,6 @@ export default function EditProduct({ params }) {
     </form>
   );
 }
+
+
+export default withAuth(EditProduct);

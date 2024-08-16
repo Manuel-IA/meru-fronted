@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import api from '../../lib/api';
 import Link from 'next/link';
+import withAuth from '../../lib/withAuth';
 
-export default function Products() {
+function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -52,3 +53,5 @@ export default function Products() {
     </div>
   );
 }
+
+export default withAuth(Products);

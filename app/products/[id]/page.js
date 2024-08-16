@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import api from '../../../lib/api';
+import withAuth from '../../../lib/withAuth';
 
-export default function ProductDetails({ params }) {
+function ProductDetails({ params }) {
   const [product, setProduct] = useState(null);
   const { id } = params;
 
@@ -31,3 +32,5 @@ export default function ProductDetails({ params }) {
     </div>
   );
 }
+
+export default withAuth(ProductDetails);

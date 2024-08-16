@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '../../../lib/api';
+import withAuth from '../../../lib/withAuth';
 
-export default function NewProduct() {
+function NewProduct() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -57,3 +58,5 @@ export default function NewProduct() {
     </form>
   );
 }
+
+export default withAuth(NewProduct);
