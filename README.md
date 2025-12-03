@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Meru Frontend
 
-## Getting Started
+Interfaz web construida con **Next.js** y **Tailwind CSS**, pensada como frontend moderno para consumir APIs backend (por ejemplo, [Meru API](https://github.com/Manuel-IA/meru-api)).
 
-First, run the development server:
+Este proyecto sirve como base para aplicaciones web con React/Next.js orientadas a negocio: paneles administrativos, vistas de gestión y flujos de usuario sobre servicios backend existentes.
+
+---
+
+## Objetivos del proyecto
+
+- Proporcionar una base en **Next.js** lista para extender.
+- Utilizar **Tailwind CSS** para un diseño rápido y coherente.
+- Consumir una API externa (REST) para mostrar datos y gestionar acciones de usuario.
+- Servir como ejemplo de cómo estructuro un frontend moderno en React/Next.js.
+
+> La lógica de negocio y las pantallas concretas pueden adaptarse según las necesidades del proyecto.  
+> El foco de este repositorio está en la **estructura del frontend**, la organización de componentes y el uso de Next.js + Tailwind.
+
+---
+
+## Stack técnico
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Librería base:** React
+- **Estilos:** Tailwind CSS
+- **Lenguaje:** JavaScript (ES6+)
+- **Gestión de dependencias:** npm (o pnpm/yarn, si se prefiere)
+
+---
+
+## Requisitos previos
+
+- Node.js instalado (versión recomendada: ver `package.json`).
+- npm (incluido con Node.js) u otro gestor compatible (yarn, pnpm, bun).
+
+---
+
+## Instalación
+
+1. Clonar el repositorio:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone git@github.com:Manuel-IA/meru-fronted.git
+cd meru-fronted
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+npm run build
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
